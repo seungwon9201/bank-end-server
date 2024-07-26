@@ -5,9 +5,11 @@ import com.example.firstproject.entity.Article;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.example.firstproject.repository.ArticleRepository;
 
 @Controller
 public class ArticleController {
+    private ArticleRepository articleRepository;
     @GetMapping("/articles/new")
     public String newArticleForm() {
         return "articles/new";
@@ -19,6 +21,7 @@ public class ArticleController {
         //1. DTO를 엔티티로 변환
         Article article = form.toEntity();
         //2. 리파지터리로 엔티티를 DB에 저장
+        Article saved = articleRepository.save(article);
         return "";
     }
 }
